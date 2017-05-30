@@ -39,7 +39,7 @@ public class RatelimitApplication extends WebMvcConfigurerAdapter{
 			RedisManager.deleteKeys(pattern);
 
 			jedis_conn.set("rate_limit", jsonObject.toJSONString());
-
+			jedis_conn.close();
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

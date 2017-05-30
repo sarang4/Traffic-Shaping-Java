@@ -52,6 +52,8 @@ public class RateLimitInterceptor implements HandlerInterceptor {
                     System.out.println("Rate Limit Exceeded");
                     response.getWriter().write("Rate limit exceeded, wait for sometime");
                     response.setStatus(429);
+                    
+                    jedis_conn.close();
                     return false;
                 }
             }else if (ratelimit_type.equals("API") && ratelimit_name.equals(request_uri)){
@@ -64,10 +66,13 @@ public class RateLimitInterceptor implements HandlerInterceptor {
                     System.out.println("Rate Limit Exceeded");
                     response.getWriter().write("Rate limit exceeded, wait for sometime");
                     response.setStatus(429);
+
+                    jedis_conn.close();
                     return false;
                 }
             }
         }
+        jedis_conn.close();
         return true;
     }
 
