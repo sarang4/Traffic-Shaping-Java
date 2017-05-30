@@ -32,6 +32,26 @@ public class RateLimitInterceptor implements HandlerInterceptor {
 
         String client_id = (String) val.get("client");
 
+        /* If you'r going to add global limit in rate_limit.json apart from specialization like
+           { "client_id": "E-COM",
+             "limit": { "SEC": 10}}
+          then uncomment below code.
+        */
+
+        /*JSONObject global_limits = (JSONObject) val.get("limit");
+        if (! (RedisManager.check_rate_limit(global_limits, client_id, "global", "SEC", jedis_conn) &&
+                RedisManager.check_rate_limit(global_limits, client_id, "global", "MIN", jedis_conn) &&
+                RedisManager.check_rate_limit(global_limits, client_id, "global", "HOUR", jedis_conn) &&
+                RedisManager.check_rate_limit(global_limits, client_id, "global", "WEEK", jedis_conn) &&
+                RedisManager.check_rate_limit(global_limits, client_id, "global", "MONTH", jedis_conn))){
+            System.out.println("Global Rate Limit Exceeded");
+            response.getWriter().write("Global Rate limit exceeded, wait for sometime");
+            response.setStatus(429);
+
+            jedis_conn.close();
+            return false;
+        }*/
+
         JSONArray specialization = (JSONArray) val.get("specialization");
         Iterator<JSONObject> iterator = specialization.iterator();
 
@@ -49,8 +69,8 @@ public class RateLimitInterceptor implements HandlerInterceptor {
                         RedisManager.check_rate_limit(limits, client_id, ratelimit_name, "HOUR", jedis_conn) &&
                         RedisManager.check_rate_limit(limits, client_id, ratelimit_name, "WEEK", jedis_conn) &&
                         RedisManager.check_rate_limit(limits, client_id, ratelimit_name, "MONTH", jedis_conn))){
-                    System.out.println("Rate Limit Exceeded");
-                    response.getWriter().write("Rate limit exceeded, wait for sometime");
+                    System.out.println("Method "+ request_method +  " Rate Limit Exceeded");
+                    response.getWriter().write("Method "+ request_method + " Rate limit exceeded, wait for sometime" );
                     response.setStatus(429);
 
                     jedis_conn.close();
@@ -63,8 +83,8 @@ public class RateLimitInterceptor implements HandlerInterceptor {
                         RedisManager.check_rate_limit(limits, client_id, ratelimit_name, "HOUR", jedis_conn) &&
                         RedisManager.check_rate_limit(limits, client_id, ratelimit_name, "WEEK", jedis_conn) &&
                         RedisManager.check_rate_limit(limits, client_id, ratelimit_name, "MONTH", jedis_conn))){
-                    System.out.println("Rate Limit Exceeded");
-                    response.getWriter().write("Rate limit exceeded, wait for sometime");
+                    System.out.println("API "+ request_uri +" Rate Limit Exceeded");
+                    response.getWriter().write("API "+ request_uri + " Rate limit exceeded, wait for sometime");
                     response.setStatus(429);
 
                     jedis_conn.close();
