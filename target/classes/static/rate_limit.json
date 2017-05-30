@@ -1,0 +1,48 @@
+{
+    "client": "E-COM",
+    "limit":{
+        "HOUR" : 100,
+        "WEEK" : 900,
+        "MONTH"  : 10000
+    },
+    "specialization":[
+        {
+            "type": "METHOD",
+            "name": "GET",
+            "limit":{
+                "SEC" : 10,
+                "MIN" : 10,
+                "WEEK" : 700
+            }
+        },
+        {
+            "type": "METHOD",
+            "name": "POST",
+            "limit":{
+                "SEC" : 20,
+                "HOUR" : 40,
+                "WEEK" : 900,
+                "MONTH" : 1000
+            }
+        },
+        {
+             "type": "API",
+             "name": "/status",
+             "limit":{
+                "SEC" : 20,
+                "HOUR" : 40,
+                "WEEK" : 900,
+                "MONTH" : 1000
+             }
+        },
+        {
+             "type": "API",
+             "name": "/pay",
+             "limit":{
+                "SEC" : 10,
+                "HOUR" : 50,
+                "WEEK" : 700
+             }
+        }
+    ]
+}
