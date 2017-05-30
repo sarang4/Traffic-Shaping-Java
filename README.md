@@ -13,5 +13,5 @@ Currently when rate limit hits, platform returns 429 response code with message 
 4. Build the project and Run RatelimitApplication.java present in src/main/java/com/ratelimit/ratelimit/ .
 5. This will start the application.
 6. Currently there are 3 apis present in the project, /pay, /status, /intercept, which can be used to test the ratelimit thing.
-7. Current configuration of rate limit is present in rate_limit.json at /src/main/resources/static. If you change anything in this, please restart the application so that it will get loaded again in redis. After restart I have added code to delete older keys from redis, we can comment this if not required.
+7. Current configuration of rate limit is present in rate_limit.json at /src/main/resources/static. If you change anything in this, please restart the application to take the effect of new rate_limit.json file. After restart code will delete older keys from redis, you can comment this if not required.
 
