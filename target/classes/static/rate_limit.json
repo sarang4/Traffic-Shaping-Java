@@ -1,10 +1,5 @@
 {
     "client": "E-COM",
-    "limit":{
-        "HOUR" : 100,
-        "WEEK" : 900,
-        "MONTH"  : 10000
-    },
     "specialization":[
         {
             "type": "METHOD",

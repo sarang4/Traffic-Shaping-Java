@@ -52,7 +52,7 @@ public class RateLimitInterceptor implements HandlerInterceptor {
                     System.out.println("Rate Limit Exceeded");
                     response.getWriter().write("Rate limit exceeded, wait for sometime");
                     response.setStatus(429);
-                    
+
                     jedis_conn.close();
                     return false;
                 }
